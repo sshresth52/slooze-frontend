@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 
-
 export default function Sidebar() {
   const role = localStorage.getItem("userRole");
   const navigate = useNavigate();
@@ -12,31 +11,38 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="w-64 h-screen bg-gray-800 text-white p-4 space-y-4">
-      <h2 className="text-2xl font-bold mb-4">Slooze</h2>
+    <div className="w-64 h-screen bg-gray-800 text-white p-4 space-y-6">
+      {/* 📛 App Branding */}
+      <h2 className="text-2xl font-bold mb-4">Slooze CMS</h2>
 
-      {role === "manager" && (
+      {/* 📂 Navigation Links */}
+      <nav className="space-y-2">
+        {role === "manager" && (
+          <Link
+            to="/dashboard"
+            className="block py-2 px-4 rounded hover:bg-gray-700 transition"
+          >
+            Manager Dashboard
+          </Link>
+        )}
+
         <Link
-          to="/dashboard"
-          className="block py-2 px-4 rounded hover:bg-gray-700"
+          to="/products"
+          className="block py-2 px-4 rounded hover:bg-gray-700 transition"
         >
-          Dashboard
+          View Inventory
         </Link>
-      )}
+      </nav>
 
-      <Link
-        to="/products"
-        className="block py-2 px-4 rounded hover:bg-gray-700"
-      >
-        Products
-      </Link>
-
+      {/* 🚪 Sign Out */}
       <button
         onClick={handleLogout}
-        className="w-full text-left py-2 px-4 bg-red-600 rounded hover:bg-red-700 mt-8"
+        className="w-full text-left py-2 px-4 bg-red-600 hover:bg-red-700 transition rounded mt-6"
       >
-        Logout
+        Sign Out
       </button>
+
+      {/* 🎨 Theme Toggle */}
       <div className="mt-6">
         <ThemeToggle />
       </div>
